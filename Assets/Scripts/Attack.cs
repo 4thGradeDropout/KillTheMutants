@@ -62,13 +62,12 @@ public class Attack : MonoBehaviour
         SoundPlayer.PlayAttackSound();
         ATTACK_StartAnimation();
         var allGO = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
-        foreach ()
     }
 
-    bool PointIsInAttackZone(Vector2 point)
-    {
+    //bool PointIsInAttackZone(Vector2 point)
+    //{
 
-    }
+    //}
 
     public void ATTACK_StartAnimation()
     {
