@@ -45051,8 +45051,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &958272801
-CircleCollider2D:
+--- !u!60 &958272801
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -45064,9 +45064,30 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03249631, y: -1.6482879}
-  serializedVersion: 2
-  m_Radius: 0.75174505
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.39, y: 4.86}
+    newSize: {x: 2.39, y: 4.86}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.629841, y: -1.4826976}
+      - {x: 0.5082312, y: -1.4532855}
+      - {x: 0.23583977, y: -1.4109565}
+      - {x: -0.038695518, y: -1.4229138}
+      - {x: -0.35037774, y: -1.4980222}
+      - {x: -0.47517523, y: -1.5169349}
+      - {x: -0.56411713, y: -1.680876}
+      - {x: -0.41833237, y: -1.869524}
+      - {x: -0.11030693, y: -1.9672793}
+      - {x: 0.22877522, y: -1.9845663}
+      - {x: 0.6082982, y: -1.8908063}
+      - {x: 0.7905252, y: -1.7110555}
 --- !u!50 &958272802
 Rigidbody2D:
   serializedVersion: 4
@@ -45075,7 +45096,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958272798}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -45100,7 +45121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10523f72f3f77349b4907f0b04ba21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsometricRangePerYUnit: 100
+  Host: {fileID: 958272798}
+  SortingOrderPerYUnit: 100
 --- !u!1 &1043076941
 GameObject:
   m_ObjectHideFlags: 0
@@ -45262,7 +45284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10523f72f3f77349b4907f0b04ba21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsometricRangePerYUnit: 100
+  Host: {fileID: 0}
+  SortingOrderPerYUnit: 100
 --- !u!1 &1337555173
 GameObject:
   m_ObjectHideFlags: 0
@@ -45280,7 +45303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1337555174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -45472,7 +45495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1472939870
 Animator:
   serializedVersion: 3
@@ -45658,7 +45681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10523f72f3f77349b4907f0b04ba21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsometricRangePerYUnit: 100
+  Host: {fileID: 0}
+  SortingOrderPerYUnit: 100
 --- !u!61 &1472939878
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -45906,7 +45930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d10523f72f3f77349b4907f0b04ba21f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsometricRangePerYUnit: 100
+  Host: {fileID: 1561805625}
+  SortingOrderPerYUnit: 100
 --- !u!114 &1561805634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46101,7 +46126,12 @@ PrefabInstance:
     - target: {fileID: 4695010119447602552, guid: bfd57864e985a4341ab08c41ec7c0df0,
         type: 3}
       propertyPath: m_Mass
-      value: 100000
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695010119447602552, guid: bfd57864e985a4341ab08c41ec7c0df0,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfd57864e985a4341ab08c41ec7c0df0, type: 3}

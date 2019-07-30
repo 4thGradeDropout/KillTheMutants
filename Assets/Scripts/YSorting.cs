@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class YSorting : MonoBehaviour
 {
-    public int IsometricRangePerYUnit = 100;
+    public GameObject Host;
+    public int SortingOrderPerYUnit = 100;
 
     SpriteRenderer renderer;
 
@@ -22,14 +23,11 @@ public class YSorting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int newSortingOrder = -(int)(transform.position.y * IsometricRangePerYUnit);
+        int newSortingOrder = -(int)(transform.position.y * SortingOrderPerYUnit);
 
-        #region DebugCatching
-        //if (Input.GetKey(KeyCode.E))
-        //{
-        //    int sas = 100;
-        //}
-        #endregion
+        if (Host != null)
+            if ((Host.name == "Letov" || Host.name == "Tower1") && Input.GetKey(KeyCode.E))
+                Debug.Log($"{Host.name}: {newSortingOrder}");
 
         renderer.sortingOrder = newSortingOrder;
     }
