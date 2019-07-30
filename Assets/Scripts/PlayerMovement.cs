@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         Vector2 currentPos = rigidBody.position;
-        float horizontalInput = -Input.GetAxis("Horizontal");
+        float horizontalInput = Input.GetAxis("Horizontal");
 
         int sas;
         if (horizontalInput > 0.1f)

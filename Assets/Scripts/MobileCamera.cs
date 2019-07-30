@@ -26,7 +26,7 @@ public class MobileCamera : MonoBehaviour
         #endregion
 
         float m = ScreenBorderMargin;
-        float dirx = pos.x < m ? 1 : pos.x > Screen.width - m ? -1 : 0;
+        float dirx = pos.x < m ? -1 : pos.x > Screen.width - m ? 1 : 0;
 		float diry = pos.y < m ? -1 : pos.y > Screen.height - m ? 1 : 0;
 		Vector3 dir = new Vector3(dirx, diry, 0f);
 		//Debug.Log(dir * ScrollSpeed);
