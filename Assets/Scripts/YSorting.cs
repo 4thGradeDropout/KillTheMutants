@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class YSorting : MonoBehaviour
 {
-    public GameObject Host;
     public int SortingOrderPerYUnit = 100;
 
     SpriteRenderer renderer;
+    Collider2D collider;
 
     // Start is called before the first frame update
     void Start()
@@ -18,16 +18,16 @@ public class YSorting : MonoBehaviour
     private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
+        collider = GetComponent<Collider2D>();
     }
+
+    int prevSO = -1000;
 
     // Update is called once per frame
     void Update()
     {
-        int newSortingOrder = -(int)(transform.position.y * SortingOrderPerYUnit);
-
-        if (Host != null)
-            if ((Host.name == "Letov" || Host.name == "Tower1") && Input.GetKey(KeyCode.E))
-                Debug.Log($"{Host.name}: {newSortingOrder}");
+        Vector2 closestPoint = collider.ClosestPoint(new Vector2(-1000, -1000));
+        int newSortingOrder = -(int)(closestPoint.y * SortingOrderPerYUnit);
 
         renderer.sortingOrder = newSortingOrder;
     }
