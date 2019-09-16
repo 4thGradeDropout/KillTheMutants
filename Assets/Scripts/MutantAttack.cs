@@ -45,7 +45,7 @@ public class MutantAttack : Attack
         for (int i = 0; i < rootObjects.Count; ++i)
         {
             GameObject curGameObject = rootObjects[i];
-            if (curGameObject.name == "Letov")
+            if (curGameObject.name.Contains("Letov"))
             {
                 Vector2 humanPos = curGameObject.GetComponent<Rigidbody2D>().position;
                 Vector2 dif = humanPos - myPos;

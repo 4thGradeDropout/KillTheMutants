@@ -21,8 +21,6 @@ public class YSorting : MonoBehaviour
         collider = GetComponent<Collider2D>();
     }
 
-    int prevSO = -1000;
-
     // Update is called once per frame
     void Update()
     {
