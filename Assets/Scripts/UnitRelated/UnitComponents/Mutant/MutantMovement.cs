@@ -2,34 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Assets.Scripts;
 
-public class MutantMovement : MonoBehaviour
+public class MutantMovement : CharacterMovement
 {
-    public float movementSpeed = 1f;
-
-    public CharacterSoundsPlayer SoundPlayer;
-
-    CharacterRenderer renderer;
-    Rigidbody2D rigidBody;
-    MutantAttack attack;
-
     GameObject CurrentTarget
     {
         get
         {
-            return attack.CurrentTarget;
+            return MutantAttack.CurrentTarget;
         }
     }
 
-    private void Awake()
+    MutantAttack MutantAttack
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        renderer = GetComponentInChildren<CharacterRenderer>();
-        attack = GetComponent<MutantAttack>();
+        get
+        {
+            return attack as MutantAttack;
+        }
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
         if (attack.AnimationInProgress)
             return;
@@ -59,10 +53,5 @@ public class MutantMovement : MonoBehaviour
 
         Vector2 myPos = rigidBody.position;
         return enemyPos - myPos;
-    }
-
-    bool MovingNow(Vector2 direction)
-    {
-        return direction.magnitude > .01f;
     }
 }
