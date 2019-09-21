@@ -18,6 +18,7 @@ public class Attack : MonoBehaviour
     protected CharacterRenderer renderer;
     protected Animator animator;
     protected bool animationInProgress;
+
     protected float lastAttackStartTime;
     
 
@@ -39,7 +40,7 @@ public class Attack : MonoBehaviour
         };
     }
 
-    // Call in the end if overridden
+    // Update is called once per frame
     protected virtual void Update()
     {
         if (AttackShouldBeEnded)

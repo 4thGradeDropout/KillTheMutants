@@ -167,7 +167,6 @@ MonoBehaviour:
   Source: {fileID: 427616666}
   Footsteps: {fileID: 8300000, guid: ec904a9287de0d944baa370dd8ff1cd9, type: 3}
   AttackSound: {fileID: 8300000, guid: bf614c8f083142446a7134366c504f71, type: 3}
-  <PlayingNow>k__BackingField: 0
 --- !u!82 &427616666
 AudioSource:
   m_ObjectHideFlags: 0
@@ -405,22 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96df08b31530d9e49831ed0f5a3f637c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SelectedUnits>k__BackingField: []
-  <UnitsOnMap>k__BackingField: []
-  selectionRect:
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  actualSelectionRect:
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  draw: 0
-  startPos: {x: 0, y: 0}
-  endPos: {x: 0, y: 0}
-  selectionSkin: {fileID: 0}
 --- !u!1 &635483438
 GameObject:
   m_ObjectHideFlags: 0
@@ -45092,7 +45075,6 @@ MonoBehaviour:
   Source: {fileID: 730786693}
   Footsteps: {fileID: 8300000, guid: ec904a9287de0d944baa370dd8ff1cd9, type: 3}
   AttackSound: {fileID: 8300000, guid: bf614c8f083142446a7134366c504f71, type: 3}
-  <PlayingNow>k__BackingField: 0
 --- !u!82 &730786693
 AudioSource:
   m_ObjectHideFlags: 0
@@ -45297,7 +45279,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxVisibleStateCounter: 50
   ZCoordinate: -0.02
-  visibleStateCounter: 0
 --- !u!1 &783673329
 GameObject:
   m_ObjectHideFlags: 0
@@ -45798,11 +45779,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoubleclickDelay: 0.1
-  selectionManager: {fileID: 0}
-  oneClick: 0
-  timerForDoubleClick: 0
-  selectionMark: {fileID: 0}
-  <Selected>k__BackingField: 0
 --- !u!114 &1014938104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45810,17 +45786,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014938102}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 166a6c5186972614da3ea0b7f99bcd5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AttackDistance: 0.9
   SoundPlayer: {fileID: 730786692}
-  renderer: {fileID: 0}
-  animator: {fileID: 0}
-  animationInProgress: 0
-  lastAttackStartTime: 0
   directions: []
 --- !u!114 &1014938105
 MonoBehaviour:
@@ -45894,10 +45866,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   SoundPlayer: {fileID: 730786692}
-  renderer: {fileID: 0}
-  rigidBody: {fileID: 0}
-  attack: {fileID: 0}
-  movementThreshold: 0.01
 --- !u!114 &1014938109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45911,10 +45879,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationPrefix: 
-  animator: {fileID: 0}
-  collider: {fileID: 0}
-  attack: {fileID: 0}
-  lastDirection: 0
   staticDirections:
   - Static N
   - Static NE
@@ -46089,7 +46053,6 @@ MonoBehaviour:
   Source: {fileID: 1043076945}
   Footsteps: {fileID: 8300000, guid: ec904a9287de0d944baa370dd8ff1cd9, type: 3}
   AttackSound: {fileID: 8300000, guid: bf614c8f083142446a7134366c504f71, type: 3}
-  <PlayingNow>k__BackingField: 0
 --- !u!82 &1043076945
 AudioSource:
   m_ObjectHideFlags: 0
@@ -46414,7 +46377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1472939870
 Animator:
   serializedVersion: 3
@@ -46448,10 +46411,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   SoundPlayer: {fileID: 427616665}
-  renderer: {fileID: 0}
-  rigidBody: {fileID: 0}
-  attack: {fileID: 0}
-  movementThreshold: 0.01
 --- !u!114 &1472939872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46465,10 +46424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationPrefix: 'Mutant '
-  animator: {fileID: 0}
-  collider: {fileID: 0}
-  attack: {fileID: 0}
-  lastDirection: 0
   staticDirections:
   - Static N
   - Static NE
@@ -46595,13 +46550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AttackDistance: 0.9
   SoundPlayer: {fileID: 427616665}
-  renderer: {fileID: 0}
-  animator: {fileID: 0}
-  animationInProgress: 0
-  lastAttackStartTime: 0
   directions: []
-  rigidBody: {fileID: 0}
-  <CurrentTarget>k__BackingField: {fileID: 0}
 --- !u!114 &1472939877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46730,19 +46679,22 @@ GameObject:
   m_Component:
   - component: {fileID: 1561805628}
   - component: {fileID: 1561805627}
-  - component: {fileID: 1561805632}
-  - component: {fileID: 1561805631}
   - component: {fileID: 1561805626}
-  - component: {fileID: 1561805633}
-  - component: {fileID: 1561805636}
+  - component: {fileID: 1561805630}
   - component: {fileID: 1561805629}
+  - component: {fileID: 1561805631}
+  - component: {fileID: 1561805632}
+  - component: {fileID: 1561805633}
+  - component: {fileID: 1561805634}
+  - component: {fileID: 1561805635}
+  - component: {fileID: 1561805636}
   m_Layer: 0
   m_Name: Letov
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1561805626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46840,7 +46792,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1561805625}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4796bb502ba897a4ebdf089de9fd948a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ca2761cb7a5742458b03dd8bc0a9107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 3
+  SoundPlayer: {fileID: 1043076944}
+--- !u!114 &1561805630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561805625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a6daa175667b541b9458ec43acd83b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AnimationPrefix: 
@@ -46929,6 +46895,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SortingOrderPerYUnit: 100
+--- !u!114 &1561805634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561805625}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 166a6c5186972614da3ea0b7f99bcd5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackDistance: 0.9
+  SoundPlayer: {fileID: 1043076944}
+  directions: []
+--- !u!114 &1561805635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561805625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e9998c955506f43bb92236b8758530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoubleclickDelay: 0.4
 --- !u!114 &1561805636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47028,8 +47022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderMark: {fileID: 776474939}
-  selectionManager: {fileID: 0}
-  maxAverageScatterDistance: 1.2
 --- !u!4 &1811017145
 Transform:
   m_ObjectHideFlags: 0

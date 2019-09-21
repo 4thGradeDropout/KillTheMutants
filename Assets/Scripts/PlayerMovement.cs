@@ -1,12 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Scripts;
 
-public class HumanMovement : CharacterMovement
+public class PlayerMovement : MonoBehaviour
 {
+	public float movementSpeed = 1f;
+
+    public CharacterSoundsPlayer SoundPlayer;
+
+	CharacterRenderer renderer;
+	Rigidbody2D rigidBody;
+    Attack attack;
+
+    private void Awake()
+    {
+        rigidBody = GetComponent<Rigidbody2D>();
+        renderer = GetComponentInChildren<CharacterRenderer>();
+        attack = GetComponent<Attack>();
+    }
+	
 	// Update is called once per frame
-    protected override void FixedUpdate()
+    void FixedUpdate()
     {
         if (attack.AnimationInProgress)
             return;
@@ -15,7 +29,6 @@ public class HumanMovement : CharacterMovement
         float horizontalInput = Input.GetAxis("Horizontal");
 
         int sas;
-        string shit;
         if (horizontalInput > 0.1f)
             sas = 0;
 
@@ -32,5 +45,10 @@ public class HumanMovement : CharacterMovement
             SoundPlayer.TurnFootstepsOff();
 
         rigidBody.MovePosition(newPos);
+    }
+
+    bool MovingNow(Vector2 direction)
+    {
+        return direction.magnitude > .01f;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanAttack : Attack
+public class CharacterAttack : Attack
 {
     protected virtual void Update()
     {
