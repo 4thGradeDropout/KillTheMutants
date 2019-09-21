@@ -24,8 +24,8 @@ public class YSorting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 closestPoint = collider.ClosestPoint(new Vector2(-1000, -1000));
-        int newSortingOrder = -(int)(closestPoint.y * SortingOrderPerYUnit);
+        Vector2 mostBottomLeftPoint = collider.ClosestPoint(new Vector2(-1000, -1000));
+        int newSortingOrder = -(int)(mostBottomLeftPoint.y * SortingOrderPerYUnit);
 
         renderer.sortingOrder = newSortingOrder;
     }
