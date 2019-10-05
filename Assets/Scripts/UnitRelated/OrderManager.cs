@@ -5,9 +5,8 @@ using System.Linq;
 
 public class OrderManager : MonoBehaviour
 {
-    public OrderMark orderMark;
-
-    SelectionManager selectionManager;
+    protected OrderMark orderMark;
+    protected SelectionManager selectionManager;
 
     float maxAverageScatterDistance = 1.2f;
 
@@ -23,6 +22,8 @@ public class OrderManager : MonoBehaviour
     void Start()
     {
         selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
+        var orderMarkGO = GameObject.Find("OrderMark");
+        orderMark = GetComponentInChildren<OrderMark>(true);
     }
 
     // Update is called once per frame
