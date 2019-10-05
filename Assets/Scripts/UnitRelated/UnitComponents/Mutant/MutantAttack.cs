@@ -25,7 +25,7 @@ public class MutantAttack : Attack
         }
         if (AttackIsPossible)
         {
-            SoundPlayer.PlayAttackSound();
+            soundPlayer.PlayAttackSound();
             ATTACK_StartAnimation();
         }
         base.Update();

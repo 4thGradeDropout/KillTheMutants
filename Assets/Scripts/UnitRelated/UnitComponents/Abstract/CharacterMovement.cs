@@ -11,17 +11,13 @@ namespace Assets.Scripts
     public abstract class CharacterMovement : MonoBehaviour
     {
         public float movementSpeed = 1f;
-        public CharacterSoundsPlayer SoundPlayer;
-
-        protected CharacterRenderer renderer;
-        protected Rigidbody2D rigidBody;
-        protected Attack attack;
 
         protected void Awake()
         {
             rigidBody = GetComponent<Rigidbody2D>();
             renderer = GetComponentInChildren<CharacterRenderer>();
             attack = GetComponent<Attack>();
+            soundPlayer = GetComponentInChildren<CharacterSoundsPlayer>();
         }
 
         protected abstract void FixedUpdate();
@@ -36,5 +32,10 @@ namespace Assets.Scripts
         /// direction vector is greater than this value
         /// </summary>
         protected float movementThreshold = .01f;
+
+        protected CharacterRenderer renderer;
+        protected Rigidbody2D rigidBody;
+        protected Attack attack;
+        protected CharacterSoundsPlayer soundPlayer;
     }
 }

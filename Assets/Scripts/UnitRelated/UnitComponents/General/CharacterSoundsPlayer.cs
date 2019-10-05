@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CharacterSoundsPlayer : MonoBehaviour
 {
-    public AudioSource Source;
-
     public AudioClip Footsteps;
 
     public AudioClip AttackSound;
 
     bool PlayingNow { get; set; }
 
+    AudioSource Source { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
+        Source = GetComponent<AudioSource>();
         Source.clip = Footsteps;
         Source.loop = true;
         PlayingNow = false;

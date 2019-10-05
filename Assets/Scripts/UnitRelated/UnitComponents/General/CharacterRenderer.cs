@@ -15,6 +15,14 @@ public class CharacterRenderer : MonoBehaviour
         }
     }
 
+    public string PreparedAnimationPrefix
+    {
+        get
+        {
+            return AnimationPrefix == "" ? AnimationPrefix : AnimationPrefix + " ";
+        }
+    }
+
     Animator animator;
     BoxCollider2D collider;
     Attack attack;
@@ -29,25 +37,25 @@ public class CharacterRenderer : MonoBehaviour
 
         staticDirections = new string[]
         {
-            AnimationPrefix + "Static N",
-            AnimationPrefix + "Static NE",
-            AnimationPrefix + "Static E",
-            AnimationPrefix + "Static SE",
-            AnimationPrefix + "Static S",
-            AnimationPrefix + "Static SW",
-            AnimationPrefix + "Static W",
-            AnimationPrefix + "Static NW"
+            PreparedAnimationPrefix + "Static N",
+            PreparedAnimationPrefix + "Static NE",
+            PreparedAnimationPrefix + "Static E",
+            PreparedAnimationPrefix + "Static SE",
+            PreparedAnimationPrefix + "Static S",
+            PreparedAnimationPrefix + "Static SW",
+            PreparedAnimationPrefix + "Static W",
+            PreparedAnimationPrefix + "Static NW"
         };
         runDirections = new string[]
         {
-            AnimationPrefix + "Run N",
-            AnimationPrefix + "Run NE",
-            AnimationPrefix + "Run E",
-            AnimationPrefix + "Run SE",
-            AnimationPrefix + "Run S",
-            AnimationPrefix + "Run SW",
-            AnimationPrefix + "Run W",
-            AnimationPrefix + "Run NW"
+            PreparedAnimationPrefix + "Run N",
+            PreparedAnimationPrefix + "Run NE",
+            PreparedAnimationPrefix + "Run E",
+            PreparedAnimationPrefix + "Run SE",
+            PreparedAnimationPrefix + "Run S",
+            PreparedAnimationPrefix + "Run SW",
+            PreparedAnimationPrefix + "Run W",
+            PreparedAnimationPrefix + "Run NW"
         };
     }
 	
@@ -62,8 +70,8 @@ public class CharacterRenderer : MonoBehaviour
     {
         
     }
-	
-	public void SetDirection(Vector2 direction)
+
+    public void SetDirection(Vector2 direction)
     {
         if (attack.AnimationInProgress)
             return;

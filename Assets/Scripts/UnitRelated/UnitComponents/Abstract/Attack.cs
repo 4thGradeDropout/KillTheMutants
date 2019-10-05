@@ -5,7 +5,6 @@ using UnityEngine;
 public class Attack : MonoBehaviour
 {
     public float AttackDistance = 0.9f;
-    public CharacterSoundsPlayer SoundPlayer;
 
     public bool AnimationInProgress
     {
@@ -19,23 +18,25 @@ public class Attack : MonoBehaviour
     protected Animator animator;
     protected bool animationInProgress;
     protected float lastAttackStartTime;
-    
+    protected CharacterSoundsPlayer soundPlayer;
 
     protected virtual void Awake()
     {
         animator = GetComponent<Animator>();
         renderer = GetComponent<CharacterRenderer>();
+        soundPlayer = GetComponentInChildren<CharacterSoundsPlayer>();
         animationInProgress = false;
+        string animationPrefix = renderer.PreparedAnimationPrefix;
         directions = new string[]
         {
-            renderer.AnimationPrefix + "Attack N",
-            renderer.AnimationPrefix + "Attack NE",
-            renderer.AnimationPrefix + "Attack E",
-            renderer.AnimationPrefix + "Attack SE",
-            renderer.AnimationPrefix + "Attack S",
-            renderer.AnimationPrefix + "Attack SW",
-            renderer.AnimationPrefix + "Attack W",
-            renderer.AnimationPrefix + "Attack NW"
+            animationPrefix + "Attack N",
+            animationPrefix + "Attack NE",
+            animationPrefix + "Attack E",
+            animationPrefix + "Attack SE",
+            animationPrefix + "Attack S",
+            animationPrefix + "Attack SW",
+            animationPrefix + "Attack W",
+            animationPrefix + "Attack NW"
         };
     }
 
@@ -58,15 +59,10 @@ public class Attack : MonoBehaviour
 
     public void PerformAttack()
     {
-        SoundPlayer.PlayAttackSound();
+        soundPlayer.PlayAttackSound();
         ATTACK_StartAnimation();
         var allGO = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
     }
-
-    //bool PointIsInAttackZone(Vector2 point)
-    //{
-
-    //}
 
     public void ATTACK_StartAnimation()
     {

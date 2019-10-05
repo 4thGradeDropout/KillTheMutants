@@ -37,9 +37,9 @@ public class MutantMovement : CharacterMovement
         renderer.SetDirection(movement);
 
         if (MovingNow(movement))
-            SoundPlayer.TurnFootstepsOn();
+            soundPlayer.TurnFootstepsOn();
         else
-            SoundPlayer.TurnFootstepsOff();
+            soundPlayer.TurnFootstepsOff();
 
         rigidBody.MovePosition(newPos);
     }
