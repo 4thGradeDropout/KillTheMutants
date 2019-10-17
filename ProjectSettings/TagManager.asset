@@ -47,6 +47,9 @@ TagManager:
   - name: GUI
     uniqueID: 1146875871
     locked: 0
+  - name: ObstacleTiles
+    uniqueID: 187735207
+    locked: 0
   - name: Objects
     uniqueID: 2226725785
     locked: 0
