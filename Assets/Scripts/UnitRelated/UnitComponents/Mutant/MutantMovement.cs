@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Assets.Scripts;
 
 public class MutantMovement : CharacterMovement
 {
@@ -23,7 +22,7 @@ public class MutantMovement : CharacterMovement
     }
 
     // Update is called once per frame
-    protected override void FixedUpdate()
+    public override void FixedUpdate()
     {
         if (attack.AnimationInProgress)
             return;
@@ -36,7 +35,7 @@ public class MutantMovement : CharacterMovement
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         renderer.SetDirection(movement);
 
-        if (MovingNow(movement))
+        if (MovingNow())
             soundPlayer.TurnFootstepsOn();
         else
             soundPlayer.TurnFootstepsOff();

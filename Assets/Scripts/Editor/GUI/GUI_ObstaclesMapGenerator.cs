@@ -10,15 +10,15 @@ public class GUI_EasyImport_Decorations : Editor
     {
         DrawDefaultInspector();
         ObstaclesMapGenerator script = (ObstaclesMapGenerator)target;
-        if (GUILayout.Button("DoMagic"))
+        if (GUILayout.Button("Сгенерировать общую карту"))
         {
-            int[,] obstaclesMap = script.GenerateMap();
+            PathFinder.GeneralMap = script.GenerateMap();
             //string arrayStr = IntArrayToString(obstaclesMap);
-            var occupiedTiles = GetOccupiedTilesCoords(obstaclesMap);
+            //var occupiedTiles = GetOccupiedTilesCoords(PathFinder.GeneralMap);
             //----------------
-            Debug.Log("Occupied tiles below:");
-            var converter = new TileCoordSystemConverter(ObstaclesMapGenerator.worldSize);
-            occupiedTiles.ForEach(tileCoords => Debug.Log(converter.PFS_To_US(tileCoords)));
+            //Debug.Log("Occupied tiles below:");
+            //var converter = new TileCoordSystemConverter(script.WorldSize);
+            //occupiedTiles.ForEach(tileCoords => Debug.Log(converter.PFS_To_US(tileCoords)));
             //----------------
         }
     }
@@ -30,7 +30,7 @@ public class GUI_EasyImport_Decorations : Editor
         {
             for (int y = 0; y < map.GetLength(1); y++)
             {
-                if (map[x,y] == OCCUPIED)
+                if (map[x,y] == ObstaclesMapGenerator.OCCUPIED)
                     res.Add(new Point(x, y));
             }
         }
@@ -51,7 +51,5 @@ public class GUI_EasyImport_Decorations : Editor
         return res;
     }
 
-    public static int EMPTY = 0;
-
-    public static int OCCUPIED = 1;
+    
 }

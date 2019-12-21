@@ -7,6 +7,7 @@ public class OrderManager : MonoBehaviour
 {
     protected OrderMark orderMark;
     protected SelectionManager selectionManager;
+    protected Navigator navigator;
 
     float maxAverageScatterDistance = 1.2f;
 
@@ -23,6 +24,7 @@ public class OrderManager : MonoBehaviour
     {
         selectionManager = GameObject.Find("SelectionManager").GetComponent<SelectionManager>();
         var orderMarkGO = GameObject.Find("OrderMark");
+        navigator = GameObject.Find("Letov").GetComponent<Navigator>();
         orderMark = GetComponentInChildren<OrderMark>(true);
     }
 
@@ -53,18 +55,31 @@ public class OrderManager : MonoBehaviour
         Vector3 PositionForMark = new Vector3(clickedPosition.x, clickedPosition.y, orderMark.ZCoordinate);
         orderMark.InstantlyMoveTo(PositionForMark);
         orderMark.gameObject.SetActive(true);
+
         //We should give different units orders to move to different locations,
-        //or they will often collide.
+        //otherwise they will often collide.
         Vector2 where = new Vector2(clickedPosition.x, clickedPosition.y);
         Vector2[] FinPoints = ScatterFinishPointsOfOrderForSelectedUnits(where);
         for (int i = 0; i < SelectedUnits.Count; i++)
         {
-            //А ВОТ ТУТ МЫ ОТДАЕМ УЖЕ РЕАЛЬНИ ПРИКАЗ!
-            //------------------------------------------------------------------------
-            //Ниже - пример, как это может делаться:
-            //CmdMoveTo moveToOrder = new CmdMoveTo(null);
-            //moveToOrder.Where = FinPoints[i];
-            //SelectedUnits[i].ReplaceCommand(moveToOrder);
+            //Now find path to that point:
+            var pathFinder = new PathFinder();
+            var mapGenerator = GameObject.Find("ObstaclesMapGenerator").GetComponent<ObstaclesMapGenerator>();
+            var converter = new TileCoordSystemConverter(mapGenerator.WorldSize, mapGenerator.CellSize);
+            Point start = converter.UW_To_PFS(SelectedUnits[i].GO_Coords);
+            Point goal = converter.UW_To_PFS(FinPoints[i]);
+            var pfsPath = pathFinder.FindPath(start, goal);
+            //Получили путь в PFS. Теперь получим путь в US.
+            var usPath = pfsPath.Select(p => converter.PFS_To_US(p)).ToList();
+            //---------------------------------------------------------------------------------------
+            Debug.Log("НАЙДЕННЫЙ ПУТЬ: " + StringManipulation.ListToString(usPath));
+            //---------------------------------------------------------------------------------------
+            //А теперь путь в UW:
+            var uwPath = usPath.Select(p => converter.US_To_UW(p)).ToList();
+            uwPath.Remove(uwPath[0]);
+            PathToCommandConverter pathToCmdConverter = new PathToCommandConverter();
+            var commands = pathToCmdConverter.PathToCommands(uwPath, navigator);
+            navigator.ReceiveCommands(commands);
         }
     }
 

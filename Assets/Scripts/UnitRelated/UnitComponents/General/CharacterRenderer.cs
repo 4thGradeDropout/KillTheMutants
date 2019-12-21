@@ -78,7 +78,7 @@ public class CharacterRenderer : MonoBehaviour
 
         string[] directionArray = null;
 
-        if (direction.magnitude < .01f)
+        if (direction.magnitude < CharacterMovement.movementThreshold)
         {
             directionArray = staticDirections;
         }

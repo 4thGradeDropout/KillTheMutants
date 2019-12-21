@@ -15,6 +15,14 @@ public class UnitSelection : MonoBehaviour
 
     public bool Selected { get; protected set; }
 
+    public Vector2 GO_Coords
+    {
+        get
+        {
+            return gameObject.transform.position;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
