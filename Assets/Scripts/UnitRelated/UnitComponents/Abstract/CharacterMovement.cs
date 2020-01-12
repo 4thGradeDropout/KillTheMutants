@@ -12,6 +12,12 @@ public abstract class CharacterMovement : MonoBehaviour
 
     public Vector2 CurrentDirection { get; set; }
 
+    protected CharacterRenderer renderer;
+    protected Rigidbody2D rigidBody;
+    protected Attack attack;
+    protected Dying dying;
+    protected CharacterSoundsPlayer soundPlayer;
+
     public void ReceiveDirection(Vector2 newDir)
     {
         CurrentDirection = newDir;
@@ -22,6 +28,7 @@ public abstract class CharacterMovement : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         renderer = GetComponentInChildren<CharacterRenderer>();
         attack = GetComponent<Attack>();
+        dying = GetComponent<Dying>();
         soundPlayer = GetComponentInChildren<CharacterSoundsPlayer>();
     }
 
@@ -38,22 +45,23 @@ public abstract class CharacterMovement : MonoBehaviour
 
     protected void Move()
     {
+        if (dying.Dead)
+            return;
+
         Vector2 currentPos = rigidBody.position;
         Vector2 inputVector = Vector2.ClampMagnitude(CurrentDirection, 1);
         Vector2 movement = inputVector * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         renderer.SetDirection(movement);
-        soundPlayer.TurnFootstepsOn();
         rigidBody.MovePosition(newPos);
     }
 
     protected void StandStill()
     {
         renderer.SetDirection(new Vector2(0,0));
-        soundPlayer.TurnFootstepsOff();
     }
 
-    protected bool MovingNow()
+    public bool MovingNow()
     {
         return CurrentDirection.magnitude > movementThreshold;
     }
@@ -63,9 +71,4 @@ public abstract class CharacterMovement : MonoBehaviour
     /// direction vector is greater than this value
     /// </summary>
     public static float movementThreshold = .1f;
-
-    protected CharacterRenderer renderer;
-    protected Rigidbody2D rigidBody;
-    protected Attack attack;
-    protected CharacterSoundsPlayer soundPlayer;
 }

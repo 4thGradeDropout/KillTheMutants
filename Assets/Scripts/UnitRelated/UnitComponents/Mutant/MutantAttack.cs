@@ -26,7 +26,7 @@ public class MutantAttack : Attack
         if (AttackIsPossible)
         {
             soundPlayer.PlayAttackSound();
-            ATTACK_StartAnimation();
+            attackAnimation.Start();
         }
         base.Update();
     }
@@ -65,7 +65,7 @@ public class MutantAttack : Attack
     {
         get
         {
-            if (animationInProgress)
+            if (AnimationInProgress)
                 return false;
             Vector2 myPos = rigidBody.position;
             Vector2 enemyPos = CurrentTarget.transform.position;

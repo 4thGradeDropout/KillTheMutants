@@ -29,16 +29,11 @@ public class MutantMovement : CharacterMovement
 
         Vector2 currentPos = rigidBody.position;
 
-        Vector2 direction = GetDesiredDirection();
-        direction = Vector2.ClampMagnitude(direction, 1);
-        Vector2 movement = direction * movementSpeed;
+        CurrentDirection = GetDesiredDirection();
+        CurrentDirection = Vector2.ClampMagnitude(CurrentDirection, 1);
+        Vector2 movement = CurrentDirection * movementSpeed;
         Vector2 newPos = currentPos + movement * Time.fixedDeltaTime;
         renderer.SetDirection(movement);
-
-        if (MovingNow())
-            soundPlayer.TurnFootstepsOn();
-        else
-            soundPlayer.TurnFootstepsOff();
 
         rigidBody.MovePosition(newPos);
     }

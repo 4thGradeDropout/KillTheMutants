@@ -71,7 +71,7 @@ public class ObstaclesMapGenerator : MonoBehaviour
         List<GameObject> allGOs = new List<GameObject>();
         SceneManager.GetActiveScene().GetRootGameObjects(allGOs);
         string allGOsStr = StringManipulation.ListToString(allGOs.Select(go => go.name).ToList());
-        Debug.Log($"List of all GO's: {allGOsStr}");
+        //Debug.Log($"List of all GO's: {allGOsStr}");
         var allColliders = GetAllColliders(allGOs);
         for (int i = 0; i < allColliders.Count; i++)
         {
@@ -162,14 +162,14 @@ public class ObstaclesMapGenerator : MonoBehaviour
                 i
             );
         //-------------------------------------------------------------
-        if (intersectionInfo.CellFraction != 0 
-         && !currentColliderGameObject.name.ToLower().Contains("letov"))
-        {
-            Debug.Log(intersectionInfo);
-            Debug.Log("Cell (World):" + StringManipulation.ListToString(cell));
-            Debug.Log($"Cell (US): {tileCoords}");
-            Debug.Log("Collider points (World): " + StringManipulation.ListToString<Vector2>(colliderPoints));
-        }
+        //if (intersectionInfo.CellFraction != 0 
+        // && !currentColliderGameObject.name.ToLower().Contains("letov"))
+        //{
+        //    Debug.Log(intersectionInfo);
+        //    Debug.Log("Cell (World):" + StringManipulation.ListToString(cell));
+        //    Debug.Log($"Cell (US): {tileCoords}");
+        //    Debug.Log("Collider points (World): " + StringManipulation.ListToString<Vector2>(colliderPoints));
+        //}
         //-------------------------------------------------------------     
         resultArray[pfsCoords.X, pfsCoords.Y] += occupiedFraction;
     }

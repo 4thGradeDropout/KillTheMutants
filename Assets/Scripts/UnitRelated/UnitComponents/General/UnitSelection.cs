@@ -7,11 +7,14 @@ public class UnitSelection : MonoBehaviour
     public float DoubleclickDelay = 0.1f; //this is how long in seconds to allow for a double click
 
     protected SelectionManager selectionManager;
+    protected Dying dying;
 
     protected bool oneClick = false;
     protected float timerForDoubleClick = 0; //counter
 
     GameObject selectionMark;
+
+    public Navigator navigator { get; set; }
 
     public bool Selected { get; protected set; }
 
@@ -34,6 +37,8 @@ public class UnitSelection : MonoBehaviour
             if (t.gameObject.name == "SelectionMark")
                 selectionMark = t.gameObject;
         }
+        dying = GetComponent<Dying>();
+        navigator = GetComponent<Navigator>();
     }
 
     // Update is called once per frame
@@ -62,13 +67,19 @@ public class UnitSelection : MonoBehaviour
 
     public void Select()
     {
+        if (dying.Dead)
+            return;
+
         selectionMark.SetActive(true);
         Selected = true;
     }
 
     public void Deselect()
     {
-        selectionMark.SetActive(false);
+        if (dying.Dead)
+            return;
+        if (selectionMark != null)
+            selectionMark.SetActive(false);
         Selected = false;
     }
 
@@ -92,7 +103,7 @@ public class UnitSelection : MonoBehaviour
         {
             if ((Time.time - timerForDoubleClick) > DoubleclickDelay)
             {
-                Debug.Log("Click counter reset");
+                //Debug.Log("Click counter reset");
                 //basically if we're here then it's been too long and we want to reset the counter
                 //so the next click is simply a single click and not a double click.
                 oneClick = false;

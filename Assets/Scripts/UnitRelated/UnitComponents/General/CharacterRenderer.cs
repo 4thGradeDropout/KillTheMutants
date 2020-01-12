@@ -26,6 +26,7 @@ public class CharacterRenderer : MonoBehaviour
     Animator animator;
     BoxCollider2D collider;
     Attack attack;
+    Dying dying;
     int lastDirection;
 
     private void Awake()
@@ -34,6 +35,7 @@ public class CharacterRenderer : MonoBehaviour
         animator = GetComponent<Animator>();
         collider = GetComponent<BoxCollider2D>();
         attack = GetComponent<Attack>();
+        dying = GetComponent<Dying>();
 
         staticDirections = new string[]
         {
@@ -73,6 +75,9 @@ public class CharacterRenderer : MonoBehaviour
 
     public void SetDirection(Vector2 direction)
     {
+        if (dying.Dead)
+            return;
+
         if (attack.AnimationInProgress)
             return;
 
@@ -101,10 +106,8 @@ public class CharacterRenderer : MonoBehaviour
     //        ColliderGhost.transform.localScale = new Vector3(curColliderSize.x, curColliderSize.y, 1);
     //}
 	
-	//this function converts a Vector2 direction to an index to a slice around a circle
-    //this goes in a counter-clockwise direction.
-
-    public static int DirectionToIndex(Vector2 dir, int sliceCount){
+    public static int DirectionToIndex(Vector2 dir, int sliceCount)
+    {
         //get the normalized direction
         Vector2 normDir = dir.normalized;
         //calculate how many degrees one slice is

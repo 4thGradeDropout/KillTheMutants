@@ -5,48 +5,57 @@ using UnityEngine;
 public class CharacterSoundsPlayer : MonoBehaviour
 {
     public AudioClip Footsteps;
-
     public AudioClip AttackSound;
+    public AudioClip DyingSound;
 
-    bool PlayingNow { get; set; }
-
-    AudioSource Source { get; set; }
+    protected bool playingNow;
+    protected AudioSource source;
+    protected CharacterMovement movement;
 
     // Start is called before the first frame update
     void Start()
     {
-        Source = GetComponent<AudioSource>();
-        Source.clip = Footsteps;
-        Source.loop = true;
-        PlayingNow = false;
+        source = GetComponent<AudioSource>();
+        movement = gameObject.GetComponentInParent<CharacterMovement>();
+        source.clip = Footsteps;
+        source.loop = true;
+        playingNow = false;
     }
 
     // Update is called once per frame
-    void Update()
+    public void FixedUpdate()
     {
-        
+        if (movement.MovingNow())
+            TurnFootstepsOn();
+        else
+            TurnFootstepsOff();
     }
 
     public void TurnFootstepsOn()
     {
-        if (!PlayingNow)
+        if (!playingNow)
         {
-            Source.Play();
-            PlayingNow = true;
+            source.Play();
+            playingNow = true;
         }
     }
 
     public void TurnFootstepsOff()
     {
-        if (PlayingNow)
+        if (playingNow)
         {
-            Source.Stop();
-            PlayingNow = false;
+            source.Stop();
+            playingNow = false;
         }
     }
 
     public void PlayAttackSound()
     {
-        Source.PlayOneShot(AttackSound); 
+        source.PlayOneShot(AttackSound); 
+    }
+
+    public void PlayDyingSound()
+    {
+        source.PlayOneShot(DyingSound);
     }
 }

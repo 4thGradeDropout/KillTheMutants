@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5467549271901698268}
   - component: {fileID: 5467549271901698270}
   - component: {fileID: 5467549271901698269}
+  - component: {fileID: 2107627782184568729}
   m_Layer: 0
   m_Name: Mutant
   m_TagString: Untagged
@@ -96,7 +97,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2068241511
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 7565634256115173937, guid: 62d025683e7df1642a0d5ff944685f92,
     type: 3}
@@ -123,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackDistance: 0.9
-  directions: []
 --- !u!114 &5467549271901698278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +248,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoubleclickDelay: 0.1
+--- !u!114 &2107627782184568729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467549271901698276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a211bb86aa8e024db79020425dd4bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitiallyDead: 0
 --- !u!1 &5467549272730949166
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,3 +403,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Footsteps: {fileID: 8300000, guid: ec904a9287de0d944baa370dd8ff1cd9, type: 3}
   AttackSound: {fileID: 8300000, guid: bf614c8f083142446a7134366c504f71, type: 3}
+  DyingSound: {fileID: 8300000, guid: d68632cc7aca4f1468ca2e2b66bb8627, type: 3}

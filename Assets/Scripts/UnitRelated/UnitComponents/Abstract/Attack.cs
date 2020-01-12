@@ -10,75 +10,41 @@ public class Attack : MonoBehaviour
     {
         get
         {
-            return animationInProgress;
+            return attackAnimation.AnimationInProgress;
         }
     }
 
-    protected CharacterRenderer renderer;
-    protected Animator animator;
-    protected bool animationInProgress;
-    protected float lastAttackStartTime;
+    protected ActionAnimation attackAnimation;
     protected CharacterSoundsPlayer soundPlayer;
 
     protected virtual void Awake()
     {
-        animator = GetComponent<Animator>();
-        renderer = GetComponent<CharacterRenderer>();
+        var animator = GetComponent<Animator>();
+        var renderer = GetComponent<CharacterRenderer>();
+        attackAnimation = new ActionAnimation(animator, renderer, "Attack", 0.5f);
         soundPlayer = GetComponentInChildren<CharacterSoundsPlayer>();
-        animationInProgress = false;
-        string animationPrefix = renderer.PreparedAnimationPrefix;
-        directions = new string[]
-        {
-            animationPrefix + "Attack N",
-            animationPrefix + "Attack NE",
-            animationPrefix + "Attack E",
-            animationPrefix + "Attack SE",
-            animationPrefix + "Attack S",
-            animationPrefix + "Attack SW",
-            animationPrefix + "Attack W",
-            animationPrefix + "Attack NW"
-        };
     }
 
     // Call in the end if overridden
     protected virtual void Update()
     {
-        if (AttackShouldBeEnded)
+        if (attackAnimation.ShouldBeEnded)
         {
-            ATTACK_EndAnimation();
-        }
-    }
-
-    bool AttackShouldBeEnded
-    {
-        get
-        {
-            return animationInProgress && Time.time - lastAttackStartTime > maxAttackLength;
+            //Debug.Log("Ending attack animation from Update!");
+            attackAnimation.End();
         }
     }
 
     public void PerformAttack()
     {
+        //Debug.Log("Attack started!");
         soundPlayer.PlayAttackSound();
-        ATTACK_StartAnimation();
-        var allGO = GameObject.FindObjectsOfType(typeof(MonoBehaviour));
+        attackAnimation.Start();
     }
 
-    public void ATTACK_StartAnimation()
+    public void EndAttackAnimation()
     {
-        string animationName = directions[renderer.LastDirection];
-        animator.Play(animationName);
-        animationInProgress = true;
-        lastAttackStartTime = Time.time;
+        //Debug.Log("Ending attack animation event fired!");
+        attackAnimation.End();
     }
-
-    public void ATTACK_EndAnimation()
-    {
-        Debug.Log("Attack ended!");
-        animationInProgress = false;
-    }
-
-    public string[] directions;
-
-    protected static float maxAttackLength = 0.5f;
 }

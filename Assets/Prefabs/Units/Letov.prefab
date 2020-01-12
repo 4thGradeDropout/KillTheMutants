@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 7335539849247952342}
   - component: {fileID: 7335539849247952416}
   - component: {fileID: 7335539849247952349}
+  - component: {fileID: 1282918160}
+  - component: {fileID: 5105986963711274846}
   m_Layer: 0
   m_Name: Letov
   m_TagString: Untagged
@@ -100,7 +102,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2068241511
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 9220537391910321130, guid: a0a6da14928a37941a05090d820807db,
     type: 3}
@@ -219,13 +221,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7335539849247952343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5df19291c0a025429db6168305ba2b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AttackDistance: 0.9
-  directions: []
 --- !u!114 &7335539849247952342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba432aa0d8f9f04aacc4a798a517ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 4
+  movementSpeed: 6
 --- !u!114 &7335539849247952416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoubleclickDelay: 0.1
+--- !u!114 &1282918160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335539849247952343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fdbb321f8bde904b9feccc5f3e35bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsTurnedOn: 1
+  GoalCompletionDistance: 0.6
+--- !u!114 &5105986963711274846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335539849247952343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a211bb86aa8e024db79020425dd4bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitiallyDead: 0
 --- !u!1 &7335539849318965762
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +358,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2068241511
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0a5402237709f0d4ab1aef5cd6269e26, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -485,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Footsteps: {fileID: 8300000, guid: ec904a9287de0d944baa370dd8ff1cd9, type: 3}
   AttackSound: {fileID: 8300000, guid: bf614c8f083142446a7134366c504f71, type: 3}
+  DyingSound: {fileID: 8300000, guid: d68632cc7aca4f1468ca2e2b66bb8627, type: 3}
 --- !u!1 &7335539849496024016
 GameObject:
   m_ObjectHideFlags: 0
