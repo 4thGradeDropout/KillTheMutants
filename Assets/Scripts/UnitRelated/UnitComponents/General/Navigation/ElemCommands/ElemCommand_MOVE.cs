@@ -37,6 +37,14 @@ public class ElemCommand_MOVE : ElemCommand
 
     float PreviousDistance { get; set; }
 
+    /// <summary>
+    /// Счётчик количества фреймов, в течение которых юнит не двигался, 
+    /// т.е., вероятнее всего, где-то "зацепился".
+    /// </summary>
+    int FramesWithoutMoving { get; set; } = 0;
+
+    int MaxExpectedFramesWithoutMoving { get; set; } = 100;
+
     public override bool GoalIsComplete
     {
         get
@@ -51,6 +59,14 @@ public class ElemCommand_MOVE : ElemCommand
         {
             //Debug.Log($"The distance to {GoalPosition} is {CurrentDistance}");
             PreviousDistance = CurrentDistance;
+            if (FramesWithoutMoving != 0)
+            {
+                FramesWithoutMoving = 0;
+            }
+        }
+        else
+        {
+            FramesWithoutMoving++;
         }
     }
 
@@ -69,6 +85,25 @@ public class ElemCommand_MOVE : ElemCommand
     public override void ExecuteFrame()
     {
         RefreshPreviousDistance();
+
+        if (FramesWithoutMoving >= MaxExpectedFramesWithoutMoving)
+        {
+            //Юнит застрял!
+            //Чтобы это исправить, попробуем отдать приказ заново,
+            //в ту же точку финиша, что и раньше.
+            Debug.Log("Unit STUCK! Order remaking initiated...");
+            StopAndRemakeOrder();
+        }
+    }
+
+    /// <summary>
+    /// Заставляет навигатор отбросить все текущие приказы, 
+    /// перерассчитать путь до цели и начать выполнять этот новый путь
+    /// </summary>
+    protected void StopAndRemakeOrder()
+    {
+        ForcedStop = true;
+        Host.StopAndRemakeOrder();
     }
 
     public static float GoalCompletionDistance { get; set; }

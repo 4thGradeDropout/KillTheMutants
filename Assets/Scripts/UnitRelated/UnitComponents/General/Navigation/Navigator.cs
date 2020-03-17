@@ -13,6 +13,25 @@ public class Navigator : MonoBehaviour
 
     public ElemCommand CurrentlyExecutedCommand { get; protected set; }
 
+    /// <summary>
+    /// К какой точке должна привести последовательность команд, 
+    /// выполняемая сейчас навигатором
+    /// </summary>
+    public Vector2 FinishPoint { get; set; }
+
+    /// <summary>
+    /// Координаты юнита, которому принадлежит навигатор
+    /// </summary>
+    public Vector2 UnitCoords
+    {
+        get
+        {
+            return gameObject.transform.position;
+        }
+    }
+
+    protected OrderManager Order_Manager { get; set; } 
+
     public Vector2 UnitPosition
     {
         get
@@ -25,13 +44,17 @@ public class Navigator : MonoBehaviour
     public void Awake()
     {
         NextCommands = new Queue<ElemCommand>();
+        var orderManagerGO = GameObject.Find("OrderManager");
+        Order_Manager = orderManagerGO.GetComponent<OrderManager>();
     }
 
     public void FixedUpdate()
     {
         if (IsTurnedOn)
         {
-            if (CurrentlyExecutedCommand == null || CurrentlyExecutedCommand.GoalIsComplete)
+            if (CurrentlyExecutedCommand == null 
+             || CurrentlyExecutedCommand.GoalIsComplete
+             || CurrentlyExecutedCommand.ForcedStop)
             {
                 if (CurrentlyExecutedCommand != null)
                 {
@@ -70,5 +93,13 @@ public class Navigator : MonoBehaviour
     public void ReceiveCommands(List<ElemCommand> cmds)
     {
         cmds.ForEach(cmd => ReceiveCommand(cmd));
+    }
+
+    public void StopAndRemakeOrder()
+    {
+        NextCommands.Clear();
+        CurrentlyExecutedCommand.StopExecution();
+        CurrentlyExecutedCommand = null;
+        Order_Manager.InstructNavigator(this);
     }
 }

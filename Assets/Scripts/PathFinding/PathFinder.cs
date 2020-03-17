@@ -8,6 +8,8 @@ public class PathFinder
 {
     public static int[,] GeneralMap;
 
+    public static int MaxAlgoIterations { get; set; } = 900;
+
     private int GetDistanceBetweenNeighbours()
     {
         return 1;
@@ -37,6 +39,7 @@ public class PathFinder
             HeuristicEstimatePathLength = GetHeuristicPathLength(start, goal)
         };
         openSet.Add(startNode);
+        int counter = 0;
         while (openSet.Count > 0)
         {
             // Шаг 3.
@@ -71,6 +74,11 @@ public class PathFinder
                     openNode.PathLengthFromStart = neighbourNode.PathLengthFromStart;
                 }
             }
+            if (counter >= MaxAlgoIterations)
+            {
+                return null;
+            }
+            counter++;
         }
         // Шаг 10.
         return null;

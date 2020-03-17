@@ -10,6 +10,8 @@ public class OrderManager : MonoBehaviour
 
     float maxAverageScatterDistance = 1.2f;
 
+    TileCoordSystemConverter CoordConverter { get; set; }
+
     List<UnitSelection> SelectedUnits
     {
         get
@@ -60,27 +62,62 @@ public class OrderManager : MonoBehaviour
         Vector2[] FinPoints = ScatterFinishPointsOfOrderForSelectedUnits(where);
         for (int i = 0; i < SelectedUnits.Count; i++)
         {
-            //Now find path to that point:
-            var pathFinder = new PathFinder();
-            var mapGenerator = GameObject.Find("ObstaclesMapGenerator").GetComponent<ObstaclesMapGenerator>();
-            var converter = new TileCoordSystemConverter(mapGenerator.WorldSize, mapGenerator.CellSize);
-            Point start = converter.UW_To_PFS(SelectedUnits[i].GO_Coords);
-            Point goal = converter.UW_To_PFS(FinPoints[i]);
-            var pfsPath = pathFinder.FindPath(start, goal);
-            if (pfsPath == null) continue;
-            //Получили путь в PFS. Теперь получим путь в US.
-            var usPath = pfsPath.Select(p => converter.PFS_To_US(p)).ToList();
-            //---------------------------------------------------------------------------------------
-            //Debug.Log("НАЙДЕННЫЙ ПУТЬ: " + StringManipulation.ListToString(usPath));
-            //---------------------------------------------------------------------------------------
-            //А теперь путь в UW:
-            var uwPath = usPath.Select(p => converter.US_To_UW(p)).ToList();
-            uwPath.Remove(uwPath[0]);
-            PathToCommandConverter pathToCmdConverter = new PathToCommandConverter();
-            var unitNavigator = SelectedUnits[i].navigator;
-            var commands = pathToCmdConverter.PathToCommands(uwPath, unitNavigator);
-            unitNavigator.ReceiveCommands(commands);
+            var navigator = SelectedUnits[i].navigator;
+            navigator.FinishPoint = FinPoints[i];
+            if (!InstructNavigator(navigator))
+            {
+                continue;
+            }
         }
+    }
+
+    /// <summary>
+    /// Генерирует набор команд для попадания в finPoint и отдаёт этот набор навигатору юнита.
+    /// </summary>
+    /// <param name="finPoint"></param>
+    /// <returns></returns>
+    public bool InstructNavigator(Navigator unitNavigator)
+    {
+        var pfsPath = GetPfsPath(unitNavigator.UnitCoords, unitNavigator.FinishPoint);
+        if (pfsPath == null)
+        {
+            return false;
+        }
+        //Получили путь в PFS. Теперь получим путь в US.
+        var uwPath = GetUwPath(pfsPath);
+        CreateAndSendNavigatorCommands(uwPath, unitNavigator);
+        return true;
+    }
+
+    void CreateAndSendNavigatorCommands(List<Vector2> uwPath, Navigator unitNavigator)
+    {
+        PathToCommandConverter pathToCmdConverter = new PathToCommandConverter();
+        var commands = pathToCmdConverter.PathToCommands(uwPath, unitNavigator);
+        unitNavigator.ReceiveCommands(commands);
+    }
+
+    List<Vector2> GetUwPath(List<Point> pfsPath)
+    {
+        var usPath = pfsPath.Select(p => CoordConverter.PFS_To_US(p)).ToList();
+        //---------------------------------------------------------------------------------------
+        //Debug.Log("НАЙДЕННЫЙ ПУТЬ: " + StringManipulation.ListToString(usPath));
+        //---------------------------------------------------------------------------------------
+        //А теперь путь в UW:
+        var uwPath = usPath.Select(p => CoordConverter.US_To_UW(p)).ToList();
+        uwPath.Remove(uwPath[0]);
+        return uwPath;
+    }
+
+    List<Point> GetPfsPath(Vector2 unitCoords, Vector2 finPoint)
+    {
+        //Now find path to that point:
+        var pathFinder = new PathFinder();
+        var mapGenerator = GameObject.Find("ObstaclesMapGenerator").GetComponent<ObstaclesMapGenerator>();
+        CoordConverter = new TileCoordSystemConverter(mapGenerator.WorldSize, mapGenerator.CellSize);
+        Point start = CoordConverter.UW_To_PFS(unitCoords);
+        Point goal = CoordConverter.UW_To_PFS(finPoint);
+        var pfsPath = pathFinder.FindPath(start, goal);
+        return pfsPath;
     }
 
     Vector2[] ScatterFinishPointsOfOrderForSelectedUnits(Vector2 CentralFinishPoint)
