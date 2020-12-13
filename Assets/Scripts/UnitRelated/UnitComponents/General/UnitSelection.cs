@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class UnitSelection : MonoBehaviour
 {
-    public float DoubleclickDelay = 0.1f; //this is how long in seconds to allow for a double click
-
     protected SelectionManager selectionManager;
     protected Dying dying;
-
-    protected bool oneClick = false;
-    protected float timerForDoubleClick = 0; //counter
 
     GameObject selectionMark;
 
@@ -44,25 +39,7 @@ public class UnitSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleDoubleClickInUpdate();
-    }
-
-    public void ProcessMouseClick()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (!oneClick) // first click no previous clicks
-            {
-                oneClick = true;
-                timerForDoubleClick = Time.time; // save the current time
-                OneClickActions();
-            }
-            else
-            {
-                oneClick = false; // found a double click, now reset
-                DoubleClickActions();
-            }
-        }
+        
     }
 
     public void Select()
@@ -83,31 +60,18 @@ public class UnitSelection : MonoBehaviour
         Selected = false;
     }
 
-    void OneClickActions()
+    public void OneClickActions()
     {
         //Debug.Log("Single click actions");
         selectionManager.ClearSelection();
         selectionManager.AddUnitToSelection(this);
     }
 
-    void DoubleClickActions()
+    public void DoubleClickActions()
     {
         //Debug.Log("Double click actions");
         selectionManager.SelectAllUnitsOfTypeInScreen(this.gameObject);
     }
 
-    protected void HandleDoubleClickInUpdate()
-    {
-        //double click
-        if (oneClick)
-        {
-            if ((Time.time - timerForDoubleClick) > DoubleclickDelay)
-            {
-                //Debug.Log("Click counter reset");
-                //basically if we're here then it's been too long and we want to reset the counter
-                //so the next click is simply a single click and not a double click.
-                oneClick = false;
-            }
-        }
-    }
+    
 }

@@ -34,23 +34,13 @@ public class OrderManager : MonoBehaviour
         
     }
 
-    public Vector3 GetMousePosition()
-    {
-        return new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
-    }
+    
 
-    public Vector3 GetWorldCoords(Vector3 ScreenCoords)
-    {
-        var t = Camera.main.ScreenToWorldPoint(ScreenCoords);
-        t.z = -0.1f;
-        return t;
-    }
+    
 
-    public void MakeRightClickOrder()
+    public void MakeRightClickOrder(Vector3 clickedPosition)
     {
-        Vector3 mousePosition = GetMousePosition();
-        //Debug.Log("Right-click at: " + mousePosition.ToString());
-        Vector3 clickedPosition = GetWorldCoords(mousePosition);
+        
         //Debug.Log("Order created: move to " + clickedPosition.ToString());
         Vector3 PositionForMark = new Vector3(clickedPosition.x, clickedPosition.y, orderMark.ZCoordinate);
         orderMark.InstantlyMoveTo(PositionForMark);

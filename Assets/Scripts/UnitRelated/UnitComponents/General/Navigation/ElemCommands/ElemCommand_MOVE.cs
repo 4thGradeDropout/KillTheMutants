@@ -43,7 +43,7 @@ public class ElemCommand_MOVE : ElemCommand
     /// </summary>
     int FramesWithoutMoving { get; set; } = 0;
 
-    int MaxExpectedFramesWithoutMoving { get; set; } = 100;
+    int MaxExpectedFramesWithoutMoving { get; set; } = 10;
 
     public override bool GoalIsComplete
     {
